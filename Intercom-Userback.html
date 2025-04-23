@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Test Intercom Messenger with Userback</title>
+</head>
+<body>
+  <h1>Test Intercom Messenger</h1>
+  <p>This is a test page for Intercom + Userback integration.</p>
+
+  <!-- Intercom Setup -->
+  <script>
+    window.intercomSettings = {
+      app_id: "x4il9wdc",  // ✅ Your Intercom App ID
+      name: "Test User",
+      email: "test@example.com",
+      user_id: "12345",
+      created_at: Math.floor(Date.now() / 1000)
+    };
+  </script>
+
+  <script>
+    (function() {
+      var w = window;
+      var ic = w.Intercom;
+      if (typeof ic === "function") {
+        ic('reattach_activator');
+        ic('update', w.intercomSettings);
+      } else {
+        var d = document;
+        var i = function() { i.c(arguments); };
+        i.q = [];
+        i.c = function(args) { i.q.push(args); };
+        w.Intercom = i;
+        var l = function() {
+          var s = d.createElement('script');
+          s.type = 'text/javascript';
+          s.async = true;
+          s.src = 'https://widget.intercom.io/widget/x4il9wdc';
+          var x = d.getElementsByTagName('script')[0];
+          x.parentNode.insertBefore(s, x);
+        };
+        if (w.attachEvent) {
+          w.attachEvent('onload', l);
+        } else {
+          w.addEventListener('load', l, false);
+        }
+      }
+    })();
+  </script>
+
+  <!-- ✅ Correct Userback Widget -->
+  <script>
+    window.Userback = window.Userback || {};
+    Userback.access_token = 'A-ROCVjR9FNxLs5pE8c66cMdiKO';
+    Userback.user_data = {
+      id: "123456",
+      info: {
+        name: "someone",
+        email: "someone@example.com"
+      }
+    };
+    (function(d) {
+      var s = d.createElement('script');
+      s.async = true;
+      s.src = 'https://static.userback.io/widget/v1.js';
+      (d.head || d.body).appendChild(s);
+    })(document);
+  </script>
+
+</body>
+</html>
